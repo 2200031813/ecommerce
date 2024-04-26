@@ -1,0 +1,30 @@
+{% extends 'Navbars/adminappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+    <style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+<h1>{{farmer.type}}</h1>
+<h1>{{farmer.status}}</h1>
+<form method="post">
+    {% csrf_token %}
+    <select id="status" name="status" style="width: 40%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" required>
+    <option value="Accepted">Accept</option>
+    <option value="Rejected">Reject</option>
+</select>
+     <input type="submit" value="Submit" style="background-color: #4CAF50; color: white; padding: 14px 20px; margin: 8px 0; border: none; border-radius: 4px; cursor: pointer; width: 40%;">
+</form>
+
+{% endblock %}
+</body>
+</html>

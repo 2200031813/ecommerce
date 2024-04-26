@@ -1,0 +1,48 @@
+{% extends 'Navbars/adminappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+    <style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% if reviews %}
+<br>
+<table style="width:80%" align="center">
+  <tr>
+    <td align="center"><b>user</b></td>
+    <td align="center"><b>mail</b></td>
+    <td align="center"><b>phone</b></td>
+    <td align="center"><b>rating</b></td>
+    <td align="center"><b>problem</b></td>
+    <td align="center"><b>address</b></td>
+    <td align="center"><b>submit</b></td>
+  </tr>
+    {% for itm in reviews %}
+    <tr>
+    <td align="center">{{itm.user}}</td>
+    <td align="center">{{itm.mail}}</td>
+    <td align="center">{{itm.phone}}</td>
+    <td align="center">{{itm.rating}}</td>
+    <td align="center">{{itm.problem}}</td>
+    <td align="center">{{itm.address}}</td>
+    <td align="center"><a href="#">SUBMIT</a></td>
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3 align="center" style="color:red">No DATA</h3>
+    {% endif %}
+
+
+{% endblock %}
+</body>
+</html>

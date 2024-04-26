@@ -1,0 +1,45 @@
+{% extends 'Navbars/Suppliersappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+{% block body %}
+
+{% if item %}
+ <br> <br>
+<form action="#" method="post" enctype="multipart/form-data"  style="max-width: 800px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+ {% csrf_token %}
+     <label for="image" style="margin-top: 10px;">Image:</label>
+    <input type="file" id="image" name="image" accept="image/*" style="width: 40%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    <img src="{{item.itemimage.url}}" style="height:10%;width:10%;padding:5px"/>
+    <br>
+
+        <label for="itemname">Item Name:</label><br>
+     <input type="text" id="itemname" name="itemname" style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" value={{item.itemname}} required><br><br>
+
+      <label for="itemprice">Item Cost:</label><br>
+      <input type="number" id="itemprice" name="itemprice" value={{item.itemprice}} style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" step="0.01" required><br><br>
+
+     <label for="itemstockquantity">itemstockquantity:</label><br>
+      <input type="number" id="itemstockquantity" name="itemstockquantity" value={{item.itemstockquantity}} style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" required><br><br>
+
+    <label for="itemdescription">Item Description:</label><br>
+      <input type="text" id="itemdescription" name="itemdescription" rows="4" value={{item.itemdescription}} style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" cols="50" required></input><br><br>
+    <label for="itemcategary">Item Categary:</label><br>
+        <select id="itemcategary" name="itemcategary" style="width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;" required>
+                    <option value={{item.itemcategary}}>{{item.itemcategary}}</option>
+                    <option value="">___select___</option>
+                    {% for catog in categories %}
+                    <option value={{catog}}>{{catog}}</option>
+                    {% endfor %}
+        </select>
+        <input type="submit" value="Submit" style="background-color: #4CAF50; color: white; padding: 14px 20px; margin: 8px 0; border: none; border-radius: 4px; cursor: pointer; width: 100%;">
+
+</form>
+{% endif %}
+{% endblock %}
+</body>
+</html>

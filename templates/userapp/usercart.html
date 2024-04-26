@@ -1,0 +1,153 @@
+{% extends 'Navbars/userappnavbar.html' %}
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+{% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% if items %}
+        <br>
+        <table style="width:80%" align="center">
+            <tr>
+                <td align="center"><b>itemname</b></td>
+                <td align="center"><b>itemcategary</b></td>
+                <td align="center"><b>itemprice</b></td>
+                <td align="center"><b>itemimage</b></td>
+                <td align="center"><b>itemstockquantity</b></td>
+                <td align="center"><b>supplier</b></td>
+                <td align="center"><b>Cart</b></td>
+                <td align="center"><b>Remove</b></td>
+            </tr>
+            {% for itm in items %}
+                <tr>
+                    <td align="center">{{itm.item.itemname}}</td>
+                    <td align="center">{{itm.item.itemcategary}}</td>
+                    <td align="center">{{itm.item.itemprice}}</td>
+                    <input  type="hidden" name="quantity" id="itemprice{{ itm.id }}" value="{{itm.item.itemprice}}" style="width:40px;text-align: center;" readonly ></input>
+                    <td align="center">{{itm.item.itemimage}}</td>
+                    <td align="center"><input type="text" name="quantity" id="itemstockquantity{{ itm.id }}" value="{{itm.item.itemstockquantity}}" style="width:40px;text-align: center;" readonly ></input>
+</td>
+
+                    <td align="center">{{itm.supplier}}</td>
+                    <td align="center">
+                        <button onclick="decreaseQuantity({{ itm.id }})"><<</button>
+                        <input type="text" name="quantity" id="quantity{{ itm.id }}" value="{{ itm.quantity }}" style="width:40px;text-align: center;" readonly ></input>
+                        <button onclick="increaseQuantity({{ itm.id }})">>></button>
+                    </td>
+                    <td align="center"><a  href="removecart/{{itm.id}}">Remove</a></td>
+                </tr>
+            {% endfor %}
+            <td></td><td></td>
+            <td><strong>Total Cost : <span id="finalcost">{{ total_cost }}</span></strong></td>
+            <td></td><td></td><td></td>
+<td><strong>Total Items : <span id="finalquantity">{{ total_items }}</span></strong><br></td>
+
+            <input  type="hidden" type="number" id="numberInput" value={{ total_items }}>
+            <input  type="hidden" id="currentcostInput" value={{total_cost}}>
+
+            <td align="center"><a href="{% url 'paymentforitems' %}">Book All</a></td>
+
+        </table>
+    {% else %}
+        <h3 align="center" style="color:red">No DATA</h3>
+    {% endif %}
+{% endblock %}
+</body>
+{% block js %}
+
+<script>
+       var button = document.getElementById("reloadButton");
+    button.addEventListener("click", function() {
+        location.reload();
+    });
+    function increaseQuantity(itemId) {
+    var finalquantity = document.getElementById('finalquantity');
+    var finalcost = document.getElementById('finalcost');
+
+        var numberInput = document.getElementById('numberInput');
+        var currentNumber = parseInt(numberInput.value);
+
+        var itempricevalue=document.getElementById('itemprice' + itemId);
+        var cost = parseInt(itempricevalue.value);
+
+        var currentcostInput=document.getElementById('currentcostInput');
+        var totcost = parseInt(currentcostInput.value);
+
+
+        var quantityElement = document.getElementById('quantity' + itemId);
+        var quantity = parseInt(quantityElement.value);
+        var stock = document.getElementById('itemstockquantity' + itemId);
+        var stockquantity = parseInt(stock.value);
+        if (stockquantity>0)
+        {
+            totcost=totcost+cost;
+            stock.value=stockquantity-1;
+            numberInput.value=currentNumber+1;
+            quantityElement.value = quantity + 1;
+            finalquantity.textContent=numberInput.value;
+            currentcostInput.value=totcost;
+            finalcost.textContent=currentcostInput.value+".0"
+            updateQuantity(itemId, quantity + 1,1);
+        }
+    }
+
+    function decreaseQuantity(itemId) {
+    var finalcost = document.getElementById('finalcost');
+     var itempricevalue=document.getElementById('itemprice' + itemId);
+        var cost = parseInt(itempricevalue.value);
+
+        var currentcostInput=document.getElementById('currentcostInput');
+        var totcost = parseInt(currentcostInput.value);
+
+    var finalquantity = document.getElementById('finalquantity');
+        var numberInput = document.getElementById('numberInput');
+        var currentNumber = parseInt(numberInput.value);
+        var quantityElement = document.getElementById('quantity' + itemId);
+        var quantity = parseInt(quantityElement.value);
+        var stock = document.getElementById('itemstockquantity' + itemId);
+        var stockquantity = parseInt(stock.value);
+        if (quantity > 1) {
+        totcost=totcost-cost;
+            numberInput.value=currentNumber-1;
+            stock.value=stockquantity+1;
+            quantityElement.value = quantity - 1;
+            finalquantity.textContent=numberInput.value;
+            currentcostInput.value=totcost;
+            finalcost.textContent=currentcostInput.value+".0"
+            updateQuantity(itemId, quantity - 1,5);
+        }
+    }
+
+    function updateQuantity(itemId, quantity,ram) {
+    var newRam=ram;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "{% url 'update_quantity' item_id=0 ram=7 %}".replace('0', itemId).replace('7', newRam), true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    console.log(response.message);
+                } else {
+                    console.error('Failed to update quantity');
+                }
+            }
+        };
+        var data = 'quantity=' + quantity;
+        xhr.send(data);
+    }
+</script>
+
+
+
+{% endblock %}
+</html>

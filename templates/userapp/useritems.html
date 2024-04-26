@@ -1,0 +1,129 @@
+{% extends 'Navbars/userappnavbar.html' %}
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  {% block css %}
+  <style>
+    /* Add custom CSS styles */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .categories {
+      width: 20%; /* Set width for categories */
+      padding-right: 20px; /* Add some spacing */
+    }
+
+    .category-buttons {
+      margin-bottom: 20px;
+    }
+
+    .category-buttons button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .category-buttons button:hover {
+      background-color: #0056b3;
+    }
+
+    .items {
+      width: 80%; /* Set width for items */
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .item-card {
+      width: calc(33.33% - 20px); /* Set width for each item card */
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+    }
+
+    .item-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    .item-card h3 {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .item-card p {
+      margin-top: 5px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .item-card .btn {
+      display: block;
+      width: 100%;
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      text-align: center;
+    }
+
+    .item-card .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  {% endblock %}
+</head>
+<body>
+{% block body %}
+<div class="container">
+  <div class="categories">
+    <div class="category-buttons">
+      {% if items %}
+        <a href="{% url 'useritems' %}"><button>All</button></a>
+        <a href="{% url 'itemcat' 'OVEN' %}"><button>OVEN</button></a>
+
+        {% for catog in categories %}
+          <a href="{% url 'itemcategory' catog %}"><button>{{ catog }}</button></a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="items">
+    {% if items %}
+      {% for itm in items %}
+        <div class="item-card">
+          <img src="{{ itm.itemimage.url }}" alt="{{ itm.itemname }}">
+          <h3>{{ itm.itemname }}</h3>
+          <p><b>Price:</b> {{ itm.itemprice }}</p>
+          <p><b>Category:</b> {{ itm.itemcategary }}</p>
+          <p><b>Description:</b> {{ itm.itemdescription }}</p>
+          <p><b>Rating:</b> {{ itm.itemrating }}</p>
+          <p><b>Stock Quantity:</b> {{ itm.itemstockquantity }}</p>
+          <p><b>Supplier:</b> {{ itm.supplier }}</p>
+          <a href="/user/cart/{{ itm.id }}" class="btn">ADD TO CART</a>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h3 align="center" style="color: red">No DATA</h3>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+</body>
+</html>

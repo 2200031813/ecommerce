@@ -1,0 +1,94 @@
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard | By Code Info</title>
+  <link rel="stylesheet" href="/static/css/style12.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="#">Admin Hub</a>
+      <div class="search_box">
+        <input type="text" placeholder="Search">
+        <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+      </div>
+    </div>
+
+    <div class="header-icons">
+      <i class="fas fa-bell"></i>
+      <div class="account">
+        <img src="/static/images/img-1.png" alt="">
+        <h4>babu</h4>
+      </div>
+    </div>
+  </header>
+  <div class="container">
+    <nav>
+      <div class="side_navbar">
+        <a href="{% url 'adminpannelindex' %}" >Home</a>
+        <a href="{% url 'AllSuppliers' %}" >Suppliers</a>
+        <a href="{% url 'Allusers' %}" >Users</a>
+        <a href="{% url 'Allitemsadmin' %}" >Items</a>
+        <a href="{% url 'AllNotDeliveredItems' %}" >Orders</a>
+        <a href="{% url 'Feedbackreviews' %}" >Feedback</a>
+        <a href="{% url 'adminlogout' %}" >Log Out</a>
+
+
+      </div>
+    </nav>
+
+    <div class="main-body">
+
+      <div >
+        <div >
+          {% block body %}
+          <div class="row">
+            <h3>History</h3>
+            <a href="#"><h3>Pending</h3></a>
+            <a href="#"><h3>Accepted</h3></a>
+            <a href="#"><h3>Rejected</h3></a>
+            <a href="#"><h3>See all</h3></a>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <td align="center"><b>#</b></td>
+                <td align="center"><b>itemname</b></td>
+    <td align="center"><b>itemprice</b></td>
+    <td align="center"><b>itemcategary</b></td>
+    <td align="center"><b>itemdescription</b></td>
+    <td align="center"><b>itemrating</b></td>
+    <td align="center"><b>itemimage</b></td>
+    <td align="center"><b>farmer</b></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>2, Aug, 2022</td>
+                <td>Sam Tonny</td>
+                <td>Venkata ramana</td>
+                <td>Venkata ramana</td>
+                <td>Venkata ramana</td>
+                <td>Venkata ramana</td>
+                <td>Venkata ramana</td>
+
+              </tr>
+
+            </tbody>
+          </table>
+          {% endblock %}
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+    </div>
+  </div>
+</body>
+</html>

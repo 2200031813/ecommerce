@@ -1,0 +1,47 @@
+{% extends 'Navbars/adminappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+    <style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% if farmers %}
+<br>
+<table style="width:80%" align="center">
+  <tr>
+    <td align="center"><b>itemname</b></td>
+  </tr>
+    {% for farmer in farmers %}
+    <tr>
+    <td align="center">{{farmer.user.username}}</td>
+    <td align="center">{{farmer.user.get_full_name}}</td>
+    <td align="center">{{farmer.user.email}}</td>
+    <td align="center">{{farmer.phone}}</td>
+      <td align="center">
+        <img src="{{farmer.image.url}}" style="height:50px;width:50px;padding:5px"/>
+      </td>
+
+    <td align="center">{{farmer.address}}</td>
+      <td align="center">{{farmer.status}}</td>
+      <td align="center"><a href="Suppliersstatus/{{farmer.id}}">Status</a></td>
+      <td align="center"><a href="Suppliersdelete/{{farmer.id}}">Delete</a></td>
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3 align="center" style="color:red">No DATA</h3>
+    {% endif %}
+
+
+{% endblock %}
+</body>
+</html>

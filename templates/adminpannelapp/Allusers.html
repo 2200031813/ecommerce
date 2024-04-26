@@ -1,0 +1,50 @@
+{% extends 'Navbars/adminappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+    <style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% if users %}
+<br>
+<table style="width:100%" align="center">
+  <tr>
+    <td align="center"><b>itemname</b></td>
+  </tr>
+    {% for user in users %}
+    <tr>
+    <td align="center">{{user.user.username}}</td>
+    <td align="center">{{user.user.get_full_name}}</td>
+    <td align="center">{{user.user.email}}</td>
+    <td align="center">{{user.phone}}</td>
+    <td align="center">{{user.address}}</td>
+      <td align="center">
+  {% if user.image %}
+    <img src="{{ user.image.url }}" style="height:50px;width:50px;padding:5px"/>
+  {% else %}
+    <!-- Handle case where no image is associated -->
+    No Image Available
+  {% endif %}
+</td>
+
+      <td align="center"><a href="usersdelete/{{user.id}}">DELETE</a></td>
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3 align="center" style="color:red">No DATA</h3>
+    {% endif %}
+
+
+{% endblock %}
+</body>
+</html>

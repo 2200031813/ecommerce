@@ -1,0 +1,57 @@
+{% extends 'Navbars/Suppliersappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+    <style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% if items %}
+<br>
+<table style="width:80%" align="center">
+  <tr>
+    <td align="center"><b>itemname</b></td>
+    <td align="center"><b>itemprice</b></td>
+    <td align="center"><b>itemcategary</b></td>
+    <td align="center"><b>itemdescription</b></td>
+    <td align="center"><b>quantity</b></td>
+    <td align="center"><b>itemimage</b></td>
+    <td align="center"><b>Booking user</b></td>
+    <td align="center"><b>Edit</b></td>
+    <td align="center"><b>Delete</b></td>
+  </tr>
+    {% for itm in items %}
+    <tr>
+    <td align="center">{{itm.item.itemname}}</td>
+    <td align="center">{{itm.item.itemprice}}</td>
+    <td align="center">{{itm.item.itemcategary}}</td>
+    <td align="center">{{itm.status}}</td>
+    <td align="center">{{itm.quantity}}</td>
+      <td align="center">
+        <img src="{{itm.item.itemimage.url}}" style="height:50px;width:50px;padding:5px"/>
+      </td>
+      <td align="center">{{itm.bookinguser}}</td>
+      <td align="center">{{itm.applydate}}</td>
+      <td align="center">{{itm.applytime}}</td>
+    {% if itm.status == "Not Delivered" %}
+      <td align="center"><a href="updatestatus/{{itm.id}}">Status</a></td>
+      {% endif %}
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3 align="center" style="color:red">No DATA</h3>
+    {% endif %}
+
+
+{% endblock %}
+</body>
+</html>

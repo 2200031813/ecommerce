@@ -1,0 +1,74 @@
+{% extends 'navbar.html' %}
+{% load static %}
+{% block body %}
+<div class="banner_section layout_padding">
+    
+            <div id="my_slider" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="taital_main">
+                                <h4 class="banner_taital" style="margin-left: 20%;">Log In</h4><br/>
+                                 {% if status %}
+                                 <h4 class="banner_taital" style="font-weight:10px">{{status}}</h4><br/>
+
+                                 {% endif %}
+                                 <form method="post">
+                                    {% csrf_token %}
+                                <input type="text" class="Enter_text" style="width: 80%; color: #000;border-radius: 50px;" placeholder="User Name" name="username"><br>
+                                <input type="password" class="Enter_text" style="width: 80%;color: #000;border-radius: 50px;" placeholder="Password" name="password"><br>
+<!--                                <div class="book_bt" style="margin-left: 20%;"><a style="color: black;" href="#">Log In</a>-->
+                                 <input  style="width: 38%;height:15%;margin-left:20%; color: #000;background-color:#ffc107; border-radius: 50px; display: inline-block;" type="submit" value="Log In"/>
+<!--                                </div>-->
+                                 </form>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div><img src="static/images/img-1.png" class="image_1"></div>
+                           </div>
+                        </div>
+                        <div class="button_main"><input type="hidden" class="Enter_text" placeholder="Enter keywords" name=""></div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="taital_main">
+                                 <h4 class="banner_taital"><span class="font_size_90">50%</span> Discount Online Shop</h4>
+                                 <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration </p>
+                                 <div class="book_bt"><a href="#">Shop Now</a></div>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div><img src="images/img-1.png" class="image_1"></div>
+                           </div>
+                        </div>
+                        <div class="button_main"><button class="all_text">All</button><input type="text" class="Enter_text" placeholder="Enter keywords" name=""><button class="search_text">Search</button></div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-md-6">
+                              <div class="taital_main">
+                                 <h4 class="banner_taital"><span class="font_size_90">50%</span> Discount Online Shop</h4>
+                                 <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration </p>
+                                 <div class="book_bt"><a href="#">Shop Now</a></div>
+                              </div>
+                           </div>
+                           <div class="col-md-6">
+                              <div><img src="images/img-1.png" class="image_1"></div>
+                           </div>
+                        </div>
+                        <div class="button_main"><button class="all_text">All</button><input type="text" class="Enter_text" placeholder="Enter keywords" name=""><button class="search_text">Search</button></div>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+
+</div>
+{% endblock %}

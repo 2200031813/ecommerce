@@ -1,0 +1,100 @@
+{% extends 'Navbars/Suppliersappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+<style>
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .card {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .card-content {
+    text-align: center;
+  }
+
+  .card-buttons {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .edit-button, .delete-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .edit-button {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .delete-button {
+    background-color: #ff0000;
+    color: #fff;
+  }
+</style>
+{% endblock %}
+</head>
+<body>
+{% block body %}
+
+{% if items %}
+<div class="card-container">
+  {% for itm in items %}
+  <div class="card">
+    <img src="{{itm.itemimage.url}}" alt="{{itm.itemname}}">
+    <div class="card-content">
+      <h4>{{itm.itemname}}</h4>
+      <p><b>Price:</b> {{itm.itemprice}}</p>
+      <p><b>Category:</b> {{itm.itemcategary}}</p>
+      <p><b>Description:</b> {{itm.itemdescription}}</p>
+      <p><b>Rating:</b> {{itm.itemrating}}</p>
+      <p><b>Stock Quantity:</b> {{itm.itemstockquantity}}</p>
+      <p><b>Supplier:</b> {{itm.supplier}}</p>
+      <button class="edit-button" onclick="window.location.href='Edititems/{{itm.id}}'">Edit</button>
+      <button class="delete-button" onclick="window.location.href='Deleteitems/{{itm.id}}'">Delete</button>
+    </div>
+<!--    <div class="card-buttons">-->
+<!--      <button class="edit-button" onclick="window.location.href='Edititems/{{itm.id}}'">Edit</button>-->
+<!--      <button class="delete-button" onclick="window.location.href='Deleteitems/{{itm.id}}'">Delete</button>-->
+<!--    </div>-->
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<h3 align="center" style="color:red">No DATA</h3>
+{% endif %}
+
+{% endblock %}
+</body>
+</html>

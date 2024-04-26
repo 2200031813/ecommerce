@@ -1,0 +1,15 @@
+{% extends 'Navbars/Suppliersappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+{% block body %}
+<h3 align="center">Welcome {{supplier}} to Caraft</h3>
+{% if status %}
+<h4 align="center" style="color:green">{{status}}</h4>
+{% endif %}
+{% endblock %}
+</body>
+</html>

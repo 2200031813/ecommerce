@@ -1,0 +1,54 @@
+{% extends 'Navbars/adminappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+    <style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+<div class="row">
+            <h3>Suppliers</h3>
+            <a href="{% url 'AllPendingSuppliers' %}"><h3>Pending</h3></a>
+            <a href="{% url 'AllAcceptedSuppliers' %}"><h3>Accepted</h3></a>
+            <a href="{% url 'AllRejectedSuppliers' %}"><h3>Rejected</h3></a>
+            <a href="{% url 'AllSuppliers' %}"><h3>See all</h3></a>
+          </div>
+    {% if farmers %}
+
+<br>
+<table style="width:100%" align="center">
+  <tr>
+    <td align="center"><b>itemname</b></td>
+  </tr>
+    {% for farmer in farmers %}
+    <tr>
+    <td align="center">{{farmer.user.username}}</td>
+    <td align="center">{{farmer.user.get_full_name}}</td>
+    <td align="center">{{farmer.user.email}}</td>
+    <td align="center">{{farmer.phone}}</td>
+      <td align="center">
+        <img src="{{farmer.image.url}}" style="height:50px;width:50px;padding:5px"/>
+      </td>
+
+    <td align="center">{{farmer.address}}</td>
+      <td align="center">{{farmer.status}}</td>
+      <td align="center"><a href="Suppliersstatus/{{farmer.id}}">Status</a></td>
+      <td align="center"><a href="Suppliersdelete/{{farmer.id}}">Delete</a></td>
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3 align="center" style="color:red">No DATA</h3>
+    {% endif %}
+
+
+{% endblock %}
+</body>
+</html>

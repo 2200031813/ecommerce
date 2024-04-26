@@ -1,0 +1,63 @@
+{% extends 'Navbars/userappnavbar.html' %}
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+    <style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% if items %}
+
+<br>
+<table style="width:80%" align="center">
+
+
+  <tr>
+    <td align="center"><b>itemname</b></td>
+    <td align="center"><b>itemprice</b></td>
+    <td align="center"><b>itemcategary</b></td>
+    <td align="center"><b>itemdescription</b></td>
+    <td align="center"><b>itemrating</b></td>
+    <td align="center"><b>quantity</b></td>
+    <td align="center"><b>itemimage</b></td>
+    <td align="center"><b>supplier</b></td>
+    <td align="center"><b>Cart</b></td>
+  </tr>
+    {% for itm in items %}
+    <tr>
+    <td align="center">{{itm.item.itemname}}</td>
+    <td align="center">{{itm.item.itemprice}}</td>
+    <td align="center">{{itm.item.itemcategary}}</td>
+    <td align="center">{{itm.item.itemdescription}}</td>
+    <td align="center">{{itm.item.itemrating}}</td>
+    <td align="center">{{itm.quantity}}</td>
+      <td align="center">
+        <img src="{{itm.item.itemimage.url}}" style="height:90px;width:90px;padding:5px"/>
+      </td>
+    <td align="center">{{itm.item.supplier}}</td>
+        {% if itm.status == "Delivered" %}
+         <td align="center">Rating</td>
+      {% elif itm.status == "Not Delivered" %}
+      <td align="center"><a href="Cancelitem/{{itm.id}}"><button class="jai">Cancel</button></a></td>
+      {% else %}
+      <td align="center"><a href="Deleteitem/{{itm.id}}"><button class="jai">Delete</button></a></td>
+      {% endif %}
+
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3 align="center" style="color:red">No DATA</h3>
+    {% endif %}
+
+
+{% endblock %}
+</body>
+</html>

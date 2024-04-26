@@ -1,0 +1,50 @@
+{% extends 'Navbars/userappnavbar.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Home Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-size: cover;
+      background-position: center;
+      height: 100vh; /* Ensure full viewport height */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8); /* Background color with opacity */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a subtle effect */
+    }
+
+    h1 {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+{% block body %}
+
+<div class="container" >
+<center>
+  <h1>Welcome {{user.username}} to CRAFT</h1>
+  </center>
+  <p align="center">We're here to make your shopping experience easy, enjoyable, and hassle-free Dive in, shop to your heart's content, and enjoy the convenience of online shopping." </p>
+
+  <!-- You can add more content here as needed -->
+</div>
+
+{% endblock %}
+
+</body>
+</html>

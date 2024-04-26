@@ -1,0 +1,49 @@
+{% extends 'Navbars/adminappnavbar.html' %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+{% block css %}
+
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+
+    {% if items %}
+
+<br>
+<table style="width:100%" align="center">
+  <tr>
+      <td align="center"><b>Sno</b></td>
+    <td align="center"><b>itemname</b></td>
+    <td align="center"><b>itemprice</b></td>
+    <td align="center"><b>itemcategary</b></td>
+    <td align="center"><b>itemdescription</b></td>
+    <td align="center"><b>itemrating</b></td>
+    <td align="center"><b>itemimage</b></td>
+    <td align="center"><b>farmer</b></td>
+  </tr>
+    {% for itm in items %}
+    <tr>
+    <td align="center">1</td>
+    <td align="center">{{itm.itemname}}</td>
+    <td align="center">{{itm.itemprice}}</td>
+    <td align="center">{{itm.itemcategary}}</td>
+    <td align="center">{{itm.itemdescription}}</td>
+    <td align="center">{{itm.itemrating}}</td>
+      <td align="center">
+        <img src="{{itm.itemimage.url}}" style="height:50px;width:50px;padding:5px"/>
+      </td>
+    <td align="center">{{itm.supplier}}</td>
+  </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h3 align="center" style="color:red">No DATA</h3>
+    {% endif %}
+
+
+{% endblock %}
+</body>
+</html>
